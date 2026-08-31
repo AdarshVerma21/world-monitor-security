@@ -429,7 +429,7 @@ body{{font-family:Arial;background:#06100d;color:#f4f7f6;padding:40px}}
 h1{{letter-spacing:5px}} .green{{color:#21ff87}}
 table{{width:100%;border-collapse:collapse}}th,td{{border:1px solid #29463d;padding:10px;text-align:left;vertical-align:top}}th{{background:#10251f}}
 </style></head><body><div class="container">
-<h1>🔐 WORLD <span class="green">MONITOR</span> SECURITY</h1>
+<h1>🔐  <span class="green"></span> VIGIL</h1>
 <div class="card">
 <p><b>Target:</b> {html_escape(result.get("target","Unknown"))}</p>
 <p><b>HTTP Status:</b> {html_escape(get_status_code(result))}</p>
