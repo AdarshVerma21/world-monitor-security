@@ -1,4 +1,4 @@
-import json
+
 import time
 from datetime import datetime
 from typing import Any, Dict, List
@@ -49,7 +49,7 @@ except Exception as exc:
 # ============================================================
 
 st.set_page_config(
-    page_title="World Monitor Security",
+    page_title="VIGIL Security",
     page_icon="🔐",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -73,32 +73,32 @@ st.markdown(
     padding-top: 2rem;
     padding-bottom: 4rem;
 }
-.wm-hero {
+.vigil-hero {
     padding: 38px 42px;
     border: 1px solid #19352c;
     border-radius: 22px;
     background: linear-gradient(135deg,#07140f,#030b08);
     margin-bottom: 35px;
 }
-.wm-title {
+.vigil-title {
     font-size: 42px;
     font-weight: 900;
     letter-spacing: 6px;
 }
 .green { color: #21ff87; }
-.wm-subtitle {
+.vigil-subtitle {
     margin-top: 12px;
     color: #87a99d;
     letter-spacing: 3px;
     font-size: 13px;
     font-weight: 700;
 }
-.wm-ready {
+.vigil-ready {
     margin-top: 22px;
     color: #21ff87;
     font-weight: 800;
 }
-.wm-section {
+.vigil-section {
     margin-top: 34px;
     margin-bottom: 18px;
     font-size: 21px;
@@ -181,7 +181,7 @@ st.markdown(
     border-radius: 14px;
     padding: 20px;
 }
-.wm-footer {
+.vigil-footer {
     margin-top: 55px;
     padding: 28px;
     border-top: 1px solid #19352c;
@@ -421,7 +421,7 @@ def generate_html_report(result: Dict[str, Any]) -> str:
     if not rows:
         rows = '<tr><td colspan="5">No security findings detected.</td></tr>'
     return f"""<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>World Monitor Security Report</title>
+<html><head><meta charset="UTF-8"><title>VIGIL Security Report</title>
 <style>
 body{{font-family:Arial;background:#06100d;color:#f4f7f6;padding:40px}}
 .container{{max-width:1200px;margin:auto}}
@@ -463,8 +463,8 @@ def create_pdf_report(result: Dict[str, Any]) -> bytes:
     )
     styles = getSampleStyleSheet()
     story = [
-        Paragraph("WORLD MONITOR SECURITY", styles["Title"]),
-        Paragraph("Authorized Security Assessment Report", styles["Heading2"]),
+        Paragraph("VIGIL SECURITY", styles["Title"]),
+        Paragraph("VIGIL Security Assessment Report", styles["Heading2"]),
         Spacer(1, 8),
         Paragraph(f"<b>Target:</b> {html_escape(result.get('target','Unknown'))}", styles["BodyText"]),
         Paragraph(f"<b>Generated:</b> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", styles["BodyText"]),
@@ -569,20 +569,20 @@ def find_previous_scan(target: str) -> Any:
 # ============================================================
 
 with st.sidebar:
-    st.markdown("## 🔐 WORLD MONITOR")
+    st.markdown("## 🔐 VIGIL")
     st.markdown("### SECURITY")
     st.divider()
     st.markdown(
         """
-**Navigation**
+**VIGIL Control Center**
 
-- 🔎 Run assessments
-- 📊 Review risk
-- 🛡️ Inspect findings
+- 🔎 Run security assessments
+- 📊 Review risk posture
+- 🛡️ Inspect vulnerabilities
 - 📜 Scan history
-- 📈 Risk trends
-- 🔄 Security monitoring
-- 📄 Download reports
+- 📈 Security analytics
+- 🔄 Monitor security posture
+- 📄 Export security reports
 """
     )
     st.divider()
@@ -602,10 +602,10 @@ with st.sidebar:
 
 st.markdown(
     """
-<div class="wm-hero">
-<div class="wm-title">🔐 WORLD <span class="green">MONITOR</span> SECURITY</div>
-<div class="wm-subtitle">AUTHORIZED SECURITY ASSESSMENT & CONFIGURATION ANALYSIS</div>
-<div class="wm-ready">● SYSTEM READY</div>
+<div class="vigil-hero">
+<div class="vigil-title">🔐 WORLD <span class="green">MONITOR</span> SECURITY</div>
+<div class="vigil-subtitle">UNIFIED WEB SECURITY ASSESSMENT & THREAT INTELLIGENCE</div>
+<div class="vigil-ready">● SYSTEM READY</div>
 </div>
 """,
     unsafe_allow_html=True,
@@ -615,7 +615,7 @@ st.markdown(
 # TARGET CONFIGURATION
 # ============================================================
 
-st.markdown('<div class="wm-section">TARGET CONFIGURATION</div>', unsafe_allow_html=True)
+st.markdown('<div class="vigil-section">TARGET CONFIGURATION</div>', unsafe_allow_html=True)
 
 target_url = st.text_input(
     "Target URL",
@@ -702,7 +702,7 @@ else:
     # SECURITY OVERVIEW
     # ========================================================
 
-    st.markdown('<div class="wm-section">SECURITY OVERVIEW</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">SECURITY OVERVIEW</div>', unsafe_allow_html=True)
     cols = st.columns(4, gap="medium")
     values = [
         ("RISK SCORE", risk["score"], "metric-red"),
@@ -721,7 +721,7 @@ else:
     # SEVERITY
     # ========================================================
 
-    st.markdown('<div class="wm-section">SEVERITY SUMMARY</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">SEVERITY SUMMARY</div>', unsafe_allow_html=True)
     s_cols = st.columns(4)
     for col, label in zip(s_cols, ["Critical","High","Medium","Low"]):
         with col:
@@ -731,7 +731,7 @@ else:
     # COMMAND CENTER
     # ========================================================
 
-    st.markdown('<div class="wm-section">SECURITY COMMAND CENTER</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">SECURITY COMMAND CENTER</div>', unsafe_allow_html=True)
     checks = safe_dict(result.get("checks"))
     command_cols = st.columns(5)
     for col, (icon, name, key) in zip(
@@ -749,7 +749,7 @@ else:
     # TARGET INTELLIGENCE
     # ========================================================
 
-    st.markdown('<div class="wm-section">TARGET INTELLIGENCE</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">TARGET INTELLIGENCE</div>', unsafe_allow_html=True)
     i1, i2 = st.columns(2)
     with i1:
         st.info(f"**Target:** {target}\n\n**Final URL:** {final_url}\n\n**HTTP Status:** {status or 'N/A'}")
@@ -760,7 +760,7 @@ else:
     # MONITORING
     # ========================================================
 
-    st.markdown('<div class="wm-section">SECURITY CHANGE MONITORING</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">SECURITY CHANGE MONITORING</div>', unsafe_allow_html=True)
     previous = find_previous_scan(target)
     if previous:
         previous_result = previous.get("result", {})
@@ -793,7 +793,7 @@ else:
     # FINDINGS
     # ========================================================
 
-    st.markdown('<div class="wm-section">SECURITY FINDINGS</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">SECURITY FINDINGS</div>', unsafe_allow_html=True)
     if not findings:
         st.success("🎉 No security findings detected.")
     else:
@@ -808,7 +808,7 @@ else:
     # RECOMMENDATIONS
     # ========================================================
 
-    st.markdown('<div class="wm-section">RECOMMENDATIONS</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">RECOMMENDATIONS</div>', unsafe_allow_html=True)
     recommendations = []
     for finding in findings:
         rec = finding_recommendation(finding)
@@ -824,14 +824,14 @@ else:
     # REPORTS
     # ========================================================
 
-    st.markdown('<div class="wm-section">REPORTS</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">REPORTS</div>', unsafe_allow_html=True)
     r1, r2, r3 = st.columns(3)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     with r1:
         st.download_button(
             "📄 Download JSON Report",
             data=make_json_bytes(result),
-            file_name=f"world_monitor_security_{timestamp}.json",
+            file_name=f"vigil_security_{timestamp}.json",
             mime="application/json",
             use_container_width=True,
         )
@@ -841,7 +841,7 @@ else:
             st.download_button(
                 "🌐 Download HTML Report",
                 data=html_report.encode("utf-8"),
-                file_name=f"world_monitor_security_{timestamp}.html",
+                file_name=f"vigil_security_{timestamp}.html",
                 mime="text/html",
                 use_container_width=True,
             )
@@ -853,7 +853,7 @@ else:
             st.download_button(
                 "📑 Download PDF Report",
                 data=pdf,
-                file_name=f"world_monitor_security_{timestamp}.pdf",
+                file_name=f"vigil_security_{timestamp}.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
@@ -864,7 +864,7 @@ else:
     # TECHNICAL DETAILS
     # ========================================================
 
-    st.markdown('<div class="wm-section">TECHNICAL DETAILS</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">TECHNICAL DETAILS</div>', unsafe_allow_html=True)
     tabs = st.tabs(["🛡️ HTTP Headers","🌐 CORS","🍪 Cookies","🔐 TLS / HTTPS","⚙️ Security"])
     for tab, key in zip(tabs, ["headers","cors","cookies","tls","security"]):
         with tab:
@@ -884,7 +884,7 @@ else:
     # RAW DATA
     # ========================================================
 
-    st.markdown('<div class="wm-section">RAW ASSESSMENT DATA</div>', unsafe_allow_html=True)
+    st.markdown('<div class="vigil-section">RAW ASSESSMENT DATA</div>', unsafe_allow_html=True)
     with st.expander("📦 View Complete Assessment JSON"):
         st.json(result)
 
@@ -896,7 +896,7 @@ else:
 # SCAN HISTORY
 # ============================================================
 
-st.markdown('<div class="wm-section">SCAN HISTORY</div>', unsafe_allow_html=True)
+st.markdown('<div class="vigil-section">SCAN HISTORY</div>', unsafe_allow_html=True)
 history = []
 if DATABASE_AVAILABLE:
     try:
@@ -944,7 +944,7 @@ else:
 # ANALYTICS
 # ============================================================
 
-st.markdown('<div class="wm-section">SECURITY ANALYTICS</div>', unsafe_allow_html=True)
+st.markdown('<div class="vigil-section">SECURITY ANALYTICS</div>', unsafe_allow_html=True)
 if DATABASE_AVAILABLE:
     try:
         stats = get_history_statistics()
@@ -985,7 +985,7 @@ else:
 # SCAN COMPARISON
 # ============================================================
 
-st.markdown('<div class="wm-section">SCAN COMPARISON</div>', unsafe_allow_html=True)
+st.markdown('<div class="vigil-section">SCAN COMPARISON</div>', unsafe_allow_html=True)
 if DATABASE_AVAILABLE and len(history) >= 2:
     ids = [x.get("id") for x in history if x.get("id") is not None]
     ca, cb = st.columns(2)
@@ -1025,7 +1025,7 @@ else:
 # SYSTEM STATUS
 # ============================================================
 
-st.markdown('<div class="wm-section">SYSTEM STATUS</div>', unsafe_allow_html=True)
+st.markdown('<div class="vigil-section">SYSTEM STATUS</div>', unsafe_allow_html=True)
 s1, s2, s3 = st.columns(3)
 with s1:
     st.success("🟢 Assessment Engine: READY" if ENGINE_AVAILABLE else ("🟡 Scanner Fallback: READY" if FALLBACK_SCANNERS_AVAILABLE else "🔴 Assessment Engine: UNAVAILABLE"))
@@ -1044,10 +1044,10 @@ with s3:
 
 st.markdown(
     """
-<div class="wm-footer">
-🔐 WORLD MONITOR SECURITY
+<div class="vigil-footer">
+🔐 VIGIL SECURITY
 <br><br>
-Authorized Security Assessment & Configuration Analysis
+Unified Web Security Assessment & Threat Intelligence
 <br><br>
 Scan only systems you own or have explicit authorization to test.
 </div>
